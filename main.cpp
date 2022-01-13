@@ -6,13 +6,15 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/12 16:54:54 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/13 12:37:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
-#include "ft_vector.hpp"
+#include "includes/ft_iterator.hpp"
+#include "includes/ft_vector.hpp"
+#include "includes/ft_random_access_iterator.hpp"
 
 int main(void)
 {

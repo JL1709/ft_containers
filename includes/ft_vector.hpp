@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/01/12 16:02:02 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/13 18:03:06 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FT_VECTOR_HPP
 
 #include "ft_iterator.hpp"
+#include "ft_random_access_iterator.hpp"
 #include <iterator>
 #include <memory>
 
@@ -25,18 +26,18 @@ namespace ft
 		public:
 			/* -------------------- MEMBER TYPES -------------------- */
 
-			typedef T											value_type;
-			typedef Alloc										allocator_type;
-			typedef std::ptrdiff_t								difference_type;
-			typedef	std::size_t									size_type;
-			typedef typename allocator_type::reference			reference;
-			typedef typename allocator_type::const_reference	const_reference;
-			typedef typename allocator_type::pointer			pointer;
-			typedef typename allocator_type::const_pointer		const_pointer;
-			typedef ft::iterator<value_type>					iterator;
-			typedef ft::iterator<const value_type>				const_iterator;
-			typedef ft::reverse_iterator<value_type>			reverse_iterator;
-			typedef ft::reverse_iterator<const value_type>		const_reverse_iterator;
+			typedef T														value_type;
+			typedef Alloc													allocator_type;
+			typedef std::ptrdiff_t											difference_type;
+			typedef	std::size_t												size_type;
+			typedef typename allocator_type::reference						reference;
+			typedef typename allocator_type::const_reference				const_reference;
+			typedef typename allocator_type::pointer						pointer;
+			typedef typename allocator_type::const_pointer					const_pointer;
+			typedef ft::random_access_iterator<value_type>					iterator;
+			typedef ft::random_access_iterator<const value_type>			const_iterator;
+			typedef ft::reverse_random_access_iterator<value_type>			reverse_iterator;
+			typedef ft::reverse_random_access_iterator<const value_type>	const_reverse_iterator;
 
 		public:
 			/* -------------------- MEMBER FUNCTIONS -------------------- */

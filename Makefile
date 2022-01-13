@@ -27,6 +27,7 @@ $(NAME): $(OBJ)
 	@echo "$(YELLOW)\n      -> Building $(NAME) ...$(RESET)"
 	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
+	@rm -f ./*.o
 
 clean:
 	@echo "$(BLUE)***   Deleting all objects from $(NAME)   ...   ***$(RESET)"
