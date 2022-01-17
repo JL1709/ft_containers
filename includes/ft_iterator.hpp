@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:55:36 by julian            #+#    #+#             */
-/*   Updated: 2022/01/13 17:58:36 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/13 18:10:58 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,4 @@ namespace ft
 	typename reverse_iterator<Iterator>::difference_type operator-(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs) {return (rhs.base() - lhs.base());}
 }
 
-#endif // ft
+#endif
