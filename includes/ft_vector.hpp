@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/01/19 15:37:09 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:44:32 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ namespace ft
 			// }
 
 			size_type capacity() const {return (_capacity);}
+			bool empty() const {return (_first == _last);}
 
 			/* -------------------- Element access -------------------- */ //DONE
 

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/19 15:34:35 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:46:32 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,32 +351,40 @@ int main(void)
 
 	// ---------- ft::vector::swap ---------- //
 
-	ft::vector<int> foo (3,100);   // three ints with a value of 100
-	ft::vector<int> bar (5,200);   // five ints with a value of 200
+	// ft::vector<int> foo (3,100);   // three ints with a value of 100
+	// ft::vector<int> bar (5,200);   // five ints with a value of 200
 
-	std::cout << "foo contains:";
-	for (unsigned i=0; i<foo.size(); i++)
-	std::cout << ' ' << foo[i];
-	std::cout << '\n';
+	// std::cout << "foo contains:";
+	// for (unsigned i=0; i<foo.size(); i++)
+	// std::cout << ' ' << foo[i];
+	// std::cout << '\n';
 
-	std::cout << "bar contains:";
-	for (unsigned i=0; i<bar.size(); i++)
-	std::cout << ' ' << bar[i];
-	std::cout << '\n';
+	// std::cout << "bar contains:";
+	// for (unsigned i=0; i<bar.size(); i++)
+	// std::cout << ' ' << bar[i];
+	// std::cout << '\n';
 
-	std::cout << "\nswapping\n" << std::endl;
-	foo.swap(bar);
+	// std::cout << "\nswapping\n" << std::endl;
+	// foo.swap(bar);
 
-	std::cout << "foo contains:";
-	for (unsigned i=0; i<foo.size(); i++)
-	std::cout << ' ' << foo[i];
-	std::cout << '\n';
+	// std::cout << "foo contains:";
+	// for (unsigned i=0; i<foo.size(); i++)
+	// std::cout << ' ' << foo[i];
+	// std::cout << '\n';
 
-	std::cout << "bar contains:";
-	for (unsigned i=0; i<bar.size(); i++)
-	std::cout << ' ' << bar[i];
-	std::cout << '\n';
+	// std::cout << "bar contains:";
+	// for (unsigned i=0; i<bar.size(); i++)
+	// std::cout << ' ' << bar[i];
+	// std::cout << '\n';
 
+	// ---------- ft::vector::swap ---------- //
+
+	std::cout << std::boolalpha;
+	ft::vector<int> numbers;
+	std::cout << "Initially, numbers.empty(): " << numbers.empty() << '\n';
+
+	numbers.push_back(42);
+	std::cout << "After adding elements, numbers.empty(): " << numbers.empty() << '\n';
 
 	return (0);
 }
