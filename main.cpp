@@ -6,19 +6,48 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/21 12:54:28 by jludt            ###   ########.fr       */
+/*   Updated: 2022/01/21 19:30:43 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
+#include <stack>
+#include "includes/ft_stack.hpp"
 #include "includes/ft_iterator.hpp"
 #include "includes/ft_vector.hpp"
 #include "includes/ft_random_access_iterator.hpp"
 
+// ------------> go on with push and top!!!
+
 int main(void)
 {
- 	// ft::vector<int> first;                                // default
+/* -------------------------------- FT:STACK -------------------------------- */
+
+// ---------- Construct stack ---------- //
+
+	ft::vector<int> myvector1 (3,100);         // vector with 3 elements
+	ft::vector<int> myvector2 (2,200);         // vector with 2 elements
+
+	ft::stack<int> first;                      // empty stack
+	ft::stack<int> second (myvector1);         // stack initialized to copy of deque
+
+	ft::stack<int,ft::vector<int> > third;     // empty stack using vector
+	ft::stack<int,ft::vector<int> > fourth (myvector2);
+	ft::stack<int> fifth = second;
+
+	std::cout << "size of first: " << first.size() << '\n';
+	std::cout << "size of second: " << second.size() << '\n';
+	std::cout << "size of third: " << third.size() << '\n';
+	std::cout << "size of fourth: " << fourth.size() << '\n';
+	std::cout << "size of fifth: " << fifth.size() << '\n';
+
+
+
+
+/* ------------------------------- FT:VECTOR -------------------------------- */
+	
+	 // ft::vector<int> first;                                // default
  	// ft::vector<int> second (4,100);                       // fill
   	// ft::vector<int> third (second.begin(),second.end());  // range
   	// ft::vector<int> fourth (third);                       // copy
@@ -471,36 +500,36 @@ int main(void)
 
 	// ---------- relational operators (non-member) ---------- //
 
-	ft::vector<int> alice;
-	alice.push_back(1);
-	alice.push_back(2);
-	alice.push_back(3);
-	ft::vector<int> bob;
-	bob.push_back(7);
-	bob.push_back(8);
-	bob.push_back(9);
-	bob.push_back(10);
-	ft::vector<int> eve(alice);
+	// ft::vector<int> alice;
+	// alice.push_back(1);
+	// alice.push_back(2);
+	// alice.push_back(3);
+	// ft::vector<int> bob;
+	// bob.push_back(7);
+	// bob.push_back(8);
+	// bob.push_back(9);
+	// bob.push_back(10);
+	// ft::vector<int> eve(alice);
 
-	std::cout << std::boolalpha;
+	// std::cout << std::boolalpha;
 
-	// Compare non equal containers
-	std::cout << "alice == bob returns " << (alice == bob) << '\n';
-	std::cout << "alice != bob returns " << (alice != bob) << '\n';
-	std::cout << "alice <  bob returns " << (alice < bob) << '\n';
-	std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
-	std::cout << "alice >  bob returns " << (alice > bob) << '\n';
-	std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
+	// // Compare non equal containers
+	// std::cout << "alice == bob returns " << (alice == bob) << '\n';
+	// std::cout << "alice != bob returns " << (alice != bob) << '\n';
+	// std::cout << "alice <  bob returns " << (alice < bob) << '\n';
+	// std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
+	// std::cout << "alice >  bob returns " << (alice > bob) << '\n';
+	// std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
 
-	std::cout << '\n';
+	// std::cout << '\n';
 
-	// Compare equal containers
-	std::cout << "alice == eve returns " << (alice == eve) << '\n';
-	std::cout << "alice != eve returns " << (alice != eve) << '\n';
-	std::cout << "alice <  eve returns " << (alice < eve) << '\n';
-	std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
-	std::cout << "alice >  eve returns " << (alice > eve) << '\n';
-	std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
+	// // Compare equal containers
+	// std::cout << "alice == eve returns " << (alice == eve) << '\n';
+	// std::cout << "alice != eve returns " << (alice != eve) << '\n';
+	// std::cout << "alice <  eve returns " << (alice < eve) << '\n';
+	// std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
+	// std::cout << "alice >  eve returns " << (alice > eve) << '\n';
+	// std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
 
 
 	// system("leaks ft_container");

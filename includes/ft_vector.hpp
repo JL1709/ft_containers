@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/01/21 12:55:55 by jludt            ###   ########.fr       */
+/*   Updated: 2022/01/21 15:20:37 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "ft_random_access_iterator.hpp"
 #include "ft_type_traits.hpp"
 #include "ft_utility.hpp"
+#include <vector>
 #include <string>
 #include <memory>
 #include <stdexcept>
