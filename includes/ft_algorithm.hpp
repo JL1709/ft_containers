@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_algorithm.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:10:08 by julian            #+#    #+#             */
-/*   Updated: 2022/01/13 18:47:08 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/21 12:40:03 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
 	// https://en.cppreference.com/w/cpp/algorithm/lexicographical_compare
 
 	template <class InputIterator1, class InputIterator2>
-	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
 	{
 		for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
 		{
@@ -56,7 +56,7 @@ namespace ft
 
 
 	template <class InputIterator1, class InputIterator2, class Compare>
-	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp)
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp)
 	{
 		for (; (first1 != last1) && (first2 != last2); ++first1, ++first2)
 		{

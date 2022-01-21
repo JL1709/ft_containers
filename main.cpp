@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/19 15:46:32 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/21 12:54:28 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,40 @@ int main(void)
 
 	// ---------- resize() ---------- //
 	
-	// std::vector<int> myvector;
+	// ft::vector<int> myvector;
 
 	// // set some initial content:
-	// for (int i=1;i<10;i++) myvector.push_back(i);
-
-	// myvector.resize(5);
-	// // myvector.resize(8,100);
-	// // myvector.resize(12);
-
-	// std::cout << "myvector contains:";
+	// for (int i = 1; i <= 4; i++) 
+	// 	myvector.push_back(i);
 	// for (size_t i=0;i<myvector.size();i++)
 	// 	std::cout << ' ' << myvector[i];
 	// std::cout << '\n';
+	// std::cout << "capacity = " << myvector.capacity() << std::endl;
+	
+	// myvector.resize(5);
+	// for (size_t i=0;i<myvector.size();i++)
+	// 	std::cout << ' ' << myvector[i];
+	// std::cout << '\n';
+	// std::cout << "capacity = " << myvector.capacity() << std::endl;
 
+	// myvector.resize(8,100);
+	// for (size_t i=0;i<myvector.size();i++)
+	// 	std::cout << ' ' << myvector[i];
+	// std::cout << '\n';
+	
+	// myvector.resize(12);
+	// for (size_t i=0;i<myvector.size();i++)
+	// 	std::cout << ' ' << myvector[i];
+	// std::cout << '\n';
+	// for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	// 	std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	// myvector.push_back(42);
+	// for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
+	// 	std::cout << ' ' << *it;
+	// std::cout << '\n';
+	 
 	// ---------- erase() ---------- //
 		
 	// ft::vector<int> eraseVector;
@@ -146,7 +166,7 @@ int main(void)
 	// for (unsigned i=0; i<myvector.size(); i++)
 	// 	myvector.at(i)=i;
 
-	// std	::cout << "myvector contains:";
+	// std::cout << "myvector contains:";
 	// for (unsigned i=0; i<myvector.size(); i++)
 	// 	std::cout << ' ' << myvector.at(i);
 	// std::cout << '\n';
@@ -260,28 +280,28 @@ int main(void)
 
 	// ---------- pop_back() ---------- //
 	
-		// ft::vector<int> numbers;
- 
-		// std::cout << "[";
-		// for (size_t i = 0; i < numbers.size(); i++)
-		// 	std::cout << ' ' << numbers[i];
-		// std::cout << " ]\n";
+	// ft::vector<int> numbers;
 
-		// numbers.push_back(5);
-		// numbers.push_back(3);
-		// numbers.push_back(4);
+	// std::cout << "[";
+	// for (size_t i = 0; i < numbers.size(); i++)
+	// 	std::cout << ' ' << numbers[i];
+	// std::cout << " ]\n";
 
-		// std::cout << "[";
-		// for (size_t i = 0; i < numbers.size(); i++)
-		// 	std::cout << ' ' << numbers[i];
-		// std::cout << " ]\n";
+	// numbers.push_back(5);
+	// numbers.push_back(3);
+	// numbers.push_back(4);
 
-		// numbers.pop_back();
+	// std::cout << "[";
+	// for (size_t i = 0; i < numbers.size(); i++)
+	// 	std::cout << ' ' << numbers[i];
+	// std::cout << " ]\n";
 
-		// std::cout << "[";
-		// for (size_t i = 0; i < numbers.size(); i++)
-		// 	std::cout << ' ' << numbers[i];
-		// std::cout << " ]\n";
+	// numbers.pop_back();
+
+	// std::cout << "[";
+	// for (size_t i = 0; i < numbers.size(); i++)
+	// 	std::cout << ' ' << numbers[i];
+	// std::cout << " ]\n";
 
 	// ---------- insert() ---------- //
 
@@ -377,14 +397,112 @@ int main(void)
 	// std::cout << ' ' << bar[i];
 	// std::cout << '\n';
 
-	// ---------- ft::vector::swap ---------- //
+	// ---------- empty() ---------- //
+
+	// std::cout << std::boolalpha;
+	// ft::vector<int> numbers;
+	// std::cout << "Initially, numbers.empty(): " << numbers.empty() << '\n';
+
+	// numbers.push_back(42);
+	// std::cout << "After adding elements, numbers.empty(): " << numbers.empty() << '\n';
+
+	// ---------- reserve() ---------- //
+
+	// ft::vector<int>::size_type sz;
+
+	// ft::vector<int> foo;
+	// sz = foo.capacity();
+	// std::cout << "making foo grow:\n";
+	// for (int i=0; i<100; ++i) 
+	// {
+	// 	foo.push_back(i);
+	// 	if (sz!=foo.capacity())
+	// 	{
+	// 		sz = foo.capacity();
+	// 		std::cout << "capacity changed: " << sz << '\n';
+	// 	}
+	// }
+	// // foo.reserve(142);
+	// // for (ft::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
+	// // 	std::cout << ' ' << *it;
+	// // std::cout << '\n';
+	
+	// ft::vector<int> bar;
+	// sz = bar.capacity();
+	// bar.reserve(100);   // this is the only difference with foo above
+	// std::cout << "making bar grow:\n";
+	// for (int i=0; i<100; ++i)
+	// {
+	// 	bar.push_back(i);
+	// 	if (sz!=bar.capacity())
+	// 	{
+	// 		sz = bar.capacity();
+	// 		std::cout << "capacity changed: " << sz << '\n';
+	// 	}
+	// }
+
+	// ---------- swap (vector overload -> non-member) ---------- //
+
+	// ft::vector<int> foo (3,100);   // three ints with a value of 100
+	// ft::vector<int> bar (5,200);   // five ints with a value of 200
+	
+	// std::cout << "foo contains:";
+	// for (ft::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+	// std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	// std::cout << "bar contains:";
+	// for (ft::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+	// std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	// std::cout << "\nswapping\n" << std::endl;
+	// foo.swap(bar);
+
+	// std::cout << "foo contains:";
+	// for (ft::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
+	// std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	// std::cout << "bar contains:";
+	// for (ft::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
+	// std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	// ---------- relational operators (non-member) ---------- //
+
+	ft::vector<int> alice;
+	alice.push_back(1);
+	alice.push_back(2);
+	alice.push_back(3);
+	ft::vector<int> bob;
+	bob.push_back(7);
+	bob.push_back(8);
+	bob.push_back(9);
+	bob.push_back(10);
+	ft::vector<int> eve(alice);
 
 	std::cout << std::boolalpha;
-	ft::vector<int> numbers;
-	std::cout << "Initially, numbers.empty(): " << numbers.empty() << '\n';
 
-	numbers.push_back(42);
-	std::cout << "After adding elements, numbers.empty(): " << numbers.empty() << '\n';
+	// Compare non equal containers
+	std::cout << "alice == bob returns " << (alice == bob) << '\n';
+	std::cout << "alice != bob returns " << (alice != bob) << '\n';
+	std::cout << "alice <  bob returns " << (alice < bob) << '\n';
+	std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
+	std::cout << "alice >  bob returns " << (alice > bob) << '\n';
+	std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
 
+	std::cout << '\n';
+
+	// Compare equal containers
+	std::cout << "alice == eve returns " << (alice == eve) << '\n';
+	std::cout << "alice != eve returns " << (alice != eve) << '\n';
+	std::cout << "alice <  eve returns " << (alice < eve) << '\n';
+	std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
+	std::cout << "alice >  eve returns " << (alice > eve) << '\n';
+	std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
+
+
+	// system("leaks ft_container");
 	return (0);
 }
