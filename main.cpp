@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/21 19:30:43 by jludt            ###   ########.fr       */
+/*   Updated: 2022/01/24 11:14:12 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,87 @@ int main(void)
 {
 /* -------------------------------- FT:STACK -------------------------------- */
 
-// ---------- Construct stack ---------- //
+	// ft::vector<int> myvector1 (3,100);         // vector with 3 elements
+	// ft::vector<int> myvector2 (2,200);         // vector with 2 elements
 
-	ft::vector<int> myvector1 (3,100);         // vector with 3 elements
-	ft::vector<int> myvector2 (2,200);         // vector with 2 elements
+	// ft::stack<int> first;                      // empty stack
+	// ft::stack<int> second (myvector1);         // stack initialized to copy of deque
 
-	ft::stack<int> first;                      // empty stack
-	ft::stack<int> second (myvector1);         // stack initialized to copy of deque
+	// ft::stack<int,ft::vector<int> > third;     // empty stack using vector
+	// ft::stack<int,ft::vector<int> > fourth (myvector2);
+	// ft::stack<int> fifth = second;
 
-	ft::stack<int,ft::vector<int> > third;     // empty stack using vector
-	ft::stack<int,ft::vector<int> > fourth (myvector2);
-	ft::stack<int> fifth = second;
+	// std::cout << "size of first: " << first.size() << '\n';
+	// std::cout << "size of second: " << second.size() << '\n';
+	// std::cout << "size of third: " << third.size() << '\n';
+	// std::cout << "size of fourth: " << fourth.size() << '\n';
+	// std::cout << "size of fifth: " << fifth.size() << '\n';
 
-	std::cout << "size of first: " << first.size() << '\n';
-	std::cout << "size of second: " << second.size() << '\n';
-	std::cout << "size of third: " << third.size() << '\n';
-	std::cout << "size of fourth: " << fourth.size() << '\n';
-	std::cout << "size of fifth: " << fifth.size() << '\n';
+	// ft::stack<int> pStack;
+	// std::cout << "push() and top()...\n";
+	// for (int i=0; i<5; ++i) 
+	// {
+	// 	pStack.push(i);
+	// 	std::cout << ' ' << pStack.top();
+	// }
+	// std::cout << '\n';
 
+	// std::cout << "\npop()...\n";
+	// while (!pStack.empty())
+	// {
+	// 	std::cout << ' ' << pStack.top();
+	// 	pStack.pop();
+	// }
+	// std::cout << '\n';
 
+	// std::cout << "\nempty()...\n";
+	// std::cout << std::boolalpha;
+	// ft::stack<int> container;
+	// std::cout << "Initially, container.empty(): " << container.empty() << '\n';
+	// container.push(42);
+	// std::cout << "After adding elements, container.empty(): " << container.empty() << '\n';
+	
+	// std::cout << "\nsize()...\n";
+	// ft::stack<int> myints;
+	// std::cout << "0. size: " << myints.size() << '\n';
 
+	// for (int i=0; i<5; i++) myints.push(i);
+	// std::cout << "1. size: " << myints.size() << '\n';
+
+	// myints.pop();
+	// std::cout << "2. size: " << myints.size() << '\n';
+
+	std::cout << "\nrelational operators...\n";
+	ft::stack<int> alice;
+	alice.push(1);
+	alice.push(2);
+	alice.push(3);
+	ft::stack<int> bob;
+	bob.push(7);
+	bob.push(8);
+	bob.push(9);
+	bob.push(10);
+	ft::stack<int> eve(alice);
+
+	std::cout << std::boolalpha;
+
+	// Compare non equal containers
+	std::cout << "alice == bob returns " << (alice == bob) << '\n';
+	std::cout << "alice != bob returns " << (alice != bob) << '\n';
+	std::cout << "alice <  bob returns " << (alice < bob) << '\n';
+	std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
+	std::cout << "alice >  bob returns " << (alice > bob) << '\n';
+	std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
+
+	std::cout << '\n';
+
+	// Compare equal containers
+	std::cout << "alice == eve returns " << (alice == eve) << '\n';
+	std::cout << "alice != eve returns " << (alice != eve) << '\n';
+	std::cout << "alice <  eve returns " << (alice < eve) << '\n';
+	std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
+	std::cout << "alice >  eve returns " << (alice > eve) << '\n';
+	std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
 
 /* ------------------------------- FT:VECTOR -------------------------------- */
 	
