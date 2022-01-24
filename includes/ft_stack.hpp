@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:07:37 by jludt             #+#    #+#             */
-/*   Updated: 2022/01/24 11:14:18 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/24 11:16:47 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define FT_STACK_HPP
 
 #include "ft_vector.hpp"
-#include <stack>
 
 namespace ft
 {
