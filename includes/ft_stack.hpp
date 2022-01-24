@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:07:37 by jludt             #+#    #+#             */
-/*   Updated: 2022/01/24 11:16:47 by julian           ###   ########.fr       */
+/*   Updated: 2022/01/24 11:17:27 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ namespace ft
 		
 		public:
 		
-/* MEMBER TYPES ------------------------------------------------------------- */ // DONE
+/* MEMBER TYPES ------------------------------------------------------------- */
 
 			typedef Container						container_type;
 			typedef typename Container::value_type	value_type;
