@@ -6,22 +6,136 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/01/24 11:14:12 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/02 16:27:47 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <map>
 #include "includes/ft_stack.hpp"
 #include "includes/ft_iterator.hpp"
 #include "includes/ft_vector.hpp"
+#include "includes/ft_map.hpp"
+#include "includes/ft_set.hpp"
 #include "includes/ft_random_access_iterator.hpp"
-
-// ------------> go on with push and top!!!
 
 int main(void)
 {
+/* --------------------------------- FT:SET --------------------------------- */
+
+	// ft::set<int> myset;
+	// ft::set<int>::iterator it;
+	// ft::pair<ft::set<int>::iterator,bool> ret;
+
+	// // set some initial values:
+	// for (int i=1; i<=5; ++i) myset.insert(i*10);    // set: 10 20 30 40 50
+
+	// ret = myset.insert(20);               // no new element inserted
+
+	// if (ret.second==false) it=ret.first;  // "it" now points to element 20
+
+	// myset.insert (it,25);                 // max efficiency inserting
+	// myset.insert (it,24);                 // max efficiency inserting
+	// myset.insert (it,26);                 // no max efficiency inserting
+
+	// int myints[]= {5,10,15};              // 10 already in set, not inserted
+	// myset.insert (myints,myints+3);
+
+	// std::cout << "myset contains:";
+	// for (it=myset.begin(); it!=myset.end(); ++it)
+	// std::cout << ' ' << *it;
+	// std::cout << '\n';
+
+	
+/* --------------------------------- FT:MAP --------------------------------- */
+
+	// ft::map<char,int> map;
+
+ 	// map.insert (ft::pair<char,int>('a',100));
+ 	// map.insert (ft::pair<char,int>('z',200));
+
+	// ft::pair<ft::map<char,int>::iterator,bool> ret;
+	// ret = map.insert(ft::pair<char,int>('z',500) );
+	// if (ret.second==false) 
+	// {
+	// 	std::cout << "element 'z' already existed";
+	// 	std::cout << " with a value of " << ret.first->second << '\n';
+	// }
+
+	// // second insert function version (with hint position):
+	// ft::map<char,int>::iterator it = map.begin();
+	// map.insert(it, ft::pair<char,int>('b',300));  // max efficiency inserting
+	// map.insert(it, ft::pair<char,int>('c',400));  // no max efficiency inserting
+
+	// // third insert function version (range insertion):
+	// ft::map<char,int> anothermap;
+	// anothermap.insert(map.begin(),map.find('c'));
+
+	// // showing contents:
+	// std::cout << "map contains:\n";
+	// for (it=map.begin(); it!=map.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+
+	// std::cout << "anothermap contains:\n";
+	// for (it=anothermap.begin(); it!=anothermap.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+
+	// std::cout << "test\n";
+	// map.erase('c');
+	// std::cout << "map contains:\n";
+	// for (ft::map<char,int>::iterator it=map.begin(); it!=map.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+
+// erase
+	// ft::map<char,int> mymap;
+	// ft::map<char,int>::iterator it;
+
+	// // insert some values:
+	// mymap['a']=10;
+	// mymap['b']=20;
+	// mymap['c']=30;
+	// mymap['d']=40;
+	// mymap['e']=50;
+	// mymap['f']=60;
+
+	// // show content:
+	// std::cout << "All values:\n";
+	// for (it=mymap.begin(); it!=mymap.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+	// std::cout << std::endl;
+
+	// std::cout << "Erase 'b' by iterator:\n";
+	// it=mymap.find('b');
+	// mymap.erase (it);                   // erasing by iterator
+	
+	// // show content:
+	// for (it=mymap.begin(); it!=mymap.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+	// std::cout << std::endl;
+
+	// std::cout << "Erase 'c' by key:\n";
+	// mymap.erase ('c');                  // erasing by key
+
+	// // show content:
+	// for (it=mymap.begin(); it!=mymap.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+	// std::cout << std::endl;
+
+	// std::cout << "Erase 'e' till the end() by range:\n";
+	// it=mymap.find ('e');
+	// mymap.erase ( it, mymap.end());    // erasing by range
+
+	// // show content:
+	// for (it=mymap.begin(); it!=mymap.end(); ++it)
+	// 	std::cout << it->first << " => " << it->second << '\n';
+	// std::cout << std::endl;
+ 
+
+
+
+	
 /* -------------------------------- FT:STACK -------------------------------- */
 
 	// ft::vector<int> myvector1 (3,100);         // vector with 3 elements
@@ -74,37 +188,37 @@ int main(void)
 	// myints.pop();
 	// std::cout << "2. size: " << myints.size() << '\n';
 
-	std::cout << "\nrelational operators...\n";
-	ft::stack<int> alice;
-	alice.push(1);
-	alice.push(2);
-	alice.push(3);
-	ft::stack<int> bob;
-	bob.push(7);
-	bob.push(8);
-	bob.push(9);
-	bob.push(10);
-	ft::stack<int> eve(alice);
+	// std::cout << "\nrelational operators...\n";
+	// ft::stack<int> alice;
+	// alice.push(1);
+	// alice.push(2);
+	// alice.push(3);
+	// ft::stack<int> bob;
+	// bob.push(7);
+	// bob.push(8);
+	// bob.push(9);
+	// bob.push(10);
+	// ft::stack<int> eve(alice);
 
-	std::cout << std::boolalpha;
+	// std::cout << std::boolalpha;
 
-	// Compare non equal containers
-	std::cout << "alice == bob returns " << (alice == bob) << '\n';
-	std::cout << "alice != bob returns " << (alice != bob) << '\n';
-	std::cout << "alice <  bob returns " << (alice < bob) << '\n';
-	std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
-	std::cout << "alice >  bob returns " << (alice > bob) << '\n';
-	std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
+	// // Compare non equal containers
+	// std::cout << "alice == bob returns " << (alice == bob) << '\n';
+	// std::cout << "alice != bob returns " << (alice != bob) << '\n';
+	// std::cout << "alice <  bob returns " << (alice < bob) << '\n';
+	// std::cout << "alice <= bob returns " << (alice <= bob) << '\n';
+	// std::cout << "alice >  bob returns " << (alice > bob) << '\n';
+	// std::cout << "alice >= bob returns " << (alice >= bob) << '\n';
 
-	std::cout << '\n';
+	// std::cout << '\n';
 
-	// Compare equal containers
-	std::cout << "alice == eve returns " << (alice == eve) << '\n';
-	std::cout << "alice != eve returns " << (alice != eve) << '\n';
-	std::cout << "alice <  eve returns " << (alice < eve) << '\n';
-	std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
-	std::cout << "alice >  eve returns " << (alice > eve) << '\n';
-	std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
+	// // Compare equal containers
+	// std::cout << "alice == eve returns " << (alice == eve) << '\n';
+	// std::cout << "alice != eve returns " << (alice != eve) << '\n';
+	// std::cout << "alice <  eve returns " << (alice < eve) << '\n';
+	// std::cout << "alice <= eve returns " << (alice <= eve) << '\n';
+	// std::cout << "alice >  eve returns " << (alice > eve) << '\n';
+	// std::cout << "alice >= eve returns " << (alice >= eve) << '\n';
 
 /* ------------------------------- FT:VECTOR -------------------------------- */
 	
