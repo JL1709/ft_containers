@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:12:43 by julian            #+#    #+#             */
-/*   Updated: 2022/02/02 16:27:47 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/02 16:30:19 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,49 +88,49 @@ int main(void)
 	// for (ft::map<char,int>::iterator it=map.begin(); it!=map.end(); ++it)
 	// 	std::cout << it->first << " => " << it->second << '\n';
 
-// erase
-	// ft::map<char,int> mymap;
-	// ft::map<char,int>::iterator it;
+	// erase
+	ft::map<char,int> mymap;
+	ft::map<char,int>::iterator it;
 
-	// // insert some values:
-	// mymap['a']=10;
-	// mymap['b']=20;
-	// mymap['c']=30;
-	// mymap['d']=40;
-	// mymap['e']=50;
-	// mymap['f']=60;
+	// insert some values:
+	mymap['a']=10;
+	mymap['b']=20;
+	mymap['c']=30;
+	mymap['d']=40;
+	mymap['e']=50;
+	mymap['f']=60;
 
-	// // show content:
-	// std::cout << "All values:\n";
-	// for (it=mymap.begin(); it!=mymap.end(); ++it)
-	// 	std::cout << it->first << " => " << it->second << '\n';
-	// std::cout << std::endl;
+	// show content:
+	std::cout << "All values:\n";
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+		std::cout << it->first << " => " << it->second << '\n';
+	std::cout << std::endl;
 
-	// std::cout << "Erase 'b' by iterator:\n";
-	// it=mymap.find('b');
-	// mymap.erase (it);                   // erasing by iterator
+	std::cout << "Erase 'b' by iterator:\n";
+	it=mymap.find('b');
+	mymap.erase (it);                   // erasing by iterator
 	
-	// // show content:
-	// for (it=mymap.begin(); it!=mymap.end(); ++it)
-	// 	std::cout << it->first << " => " << it->second << '\n';
-	// std::cout << std::endl;
+	// show content:
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+		std::cout << it->first << " => " << it->second << '\n';
+	std::cout << std::endl;
 
-	// std::cout << "Erase 'c' by key:\n";
-	// mymap.erase ('c');                  // erasing by key
+	std::cout << "Erase 'c' by key:\n";
+	mymap.erase ('c');                  // erasing by key
 
-	// // show content:
-	// for (it=mymap.begin(); it!=mymap.end(); ++it)
-	// 	std::cout << it->first << " => " << it->second << '\n';
-	// std::cout << std::endl;
+	// show content:
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+		std::cout << it->first << " => " << it->second << '\n';
+	std::cout << std::endl;
 
-	// std::cout << "Erase 'e' till the end() by range:\n";
-	// it=mymap.find ('e');
-	// mymap.erase ( it, mymap.end());    // erasing by range
+	std::cout << "Erase 'e' till the end() by range:\n";
+	it=mymap.find ('e');
+	mymap.erase ( it, mymap.end());    // erasing by range
 
-	// // show content:
-	// for (it=mymap.begin(); it!=mymap.end(); ++it)
-	// 	std::cout << it->first << " => " << it->second << '\n';
-	// std::cout << std::endl;
+	// show content:
+	for (it=mymap.begin(); it!=mymap.end(); ++it)
+		std::cout << it->first << " => " << it->second << '\n';
+	std::cout << std::endl;
  
 
 
