@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:47:05 by julian            #+#    #+#             */
-/*   Updated: 2022/02/03 18:02:01 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/03 18:34:56 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,7 +397,7 @@ int main()
 
 	std::cout << YELLOW << "\nstack::stack\n" << RESET;
 
-	std::deque<int> smydeque (3,100);          // deque with 3 elements
+	std::deque<int> smydeque (2,200);          // deque with 3 elements
 	std::vector<int> smyvector (2,200);        // vector with 2 elements
 	std::stack<int> sfirst;                    // empty stack
 	std::stack<int> ssecond (smydeque);         // stack initialized to copy of deque

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/01/31 18:03:03 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/03 19:08:58 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ namespace ft
 			iterator				end() {return iterator(_last);}
 			const_iterator			begin() const {return const_iterator(_first);}
 			const_iterator			end() const {return const_iterator(_last);}
-			reverse_iterator		rbegin() {return reverse_iterator(_first);}
-			reverse_iterator		rend() {return reverse_iterator(_last);}
-			const_reverse_iterator	rbegin() const {return const_reverse_iterator(_first);}
-			const_reverse_iterator	rend() const {return const_reverse_iterator(_last);}
+			reverse_iterator		rbegin() {return reverse_iterator(_last);}
+			reverse_iterator		rend() {return reverse_iterator(_first);}
+			const_reverse_iterator	rbegin() const {return const_reverse_iterator(_last);}
+			const_reverse_iterator	rend() const {return const_reverse_iterator(_first);}
 
 			/* -------------------- Capacity -------------------- */
 		

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:55:36 by julian            #+#    #+#             */
-/*   Updated: 2022/01/13 18:10:58 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/03 18:47:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ namespace ft
 	template<class Iterator>
 	struct iterator_traits
 	{
-		typedef typename Iterator::difference_type		differnece_type;
+		typedef typename Iterator::difference_type		difference_type;
 		typedef typename Iterator::value_type			value_type;
 		typedef typename Iterator::pointer				pointer;
 		typedef typename Iterator::reference			reference;
@@ -79,9 +79,9 @@ namespace ft
 
 	template <class Iterator>
 	class reverse_iterator : public ft::iterator<
-								  	  typename ft::iterator_traits<Iterator>::iterator_categoty
+								  	  typename ft::iterator_traits<Iterator>::iterator_category
 									, typename ft::iterator_traits<Iterator>::value_type
-									, typename ft::iterator_traits<Iterator>::differnence_type
+									, typename ft::iterator_traits<Iterator>::difference_type
 									, typename ft::iterator_traits<Iterator>::pointer
 									, typename ft::iterator_traits<Iterator>::reference
 									>
