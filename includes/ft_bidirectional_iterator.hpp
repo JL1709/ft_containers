@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/01/31 21:34:46 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/04 14:02:28 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #ifndef FT_BIDIRECTIONAL_ITERATOR_HPP
 #define FT_BIDIRECTIONAL_ITERATOR_HPP
 
-#include <iterator>
 #include "ft_iterator.hpp"
 #include <cstddef>
 #include "ft_nullptr.hpp"

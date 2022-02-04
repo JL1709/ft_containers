@@ -6,14 +6,13 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:22:23 by julian            #+#    #+#             */
-/*   Updated: 2022/02/01 15:29:31 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/04 14:09:43 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SET_HPP
 #define FT_SET_HPP
 
-#include <functional>
 #include <memory>
 #include <cstddef>
 #include "ft_utility.hpp"
@@ -111,7 +110,7 @@ namespace ft
 
 	// Modifiers
 
-			void clear(); //TODO!!!!!
+			void clear() {t.clear();}
 
 			ft::pair<iterator, bool> insert(const value_type& value) {return t.insert(value);}
 

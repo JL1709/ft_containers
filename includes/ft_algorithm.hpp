@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_algorithm.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:10:08 by julian            #+#    #+#             */
-/*   Updated: 2022/01/21 12:40:03 by jludt            ###   ########.fr       */
+/*   Updated: 2022/02/04 14:19:26 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ namespace ft
 				return false;
 		}
 		return (first1 == last1) && (first2 != last2);
+	}
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+	// https://en.cppreference.com/w/cpp/algorithm/swap
+	// https://www.cplusplus.com/reference/algorithm/swap/
+
+	template< class T >
+	void swap( T& a, T& b )
+	{
+		T tmp(a);
+		a = b;
+		b = tmp;
 	}
 }
 

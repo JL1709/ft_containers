@@ -1,5 +1,6 @@
 # Name of the program
-NAME = ft_containers
+NAME_FT  = ft_containers
+NAME_STD = std_containers
 
 # Color codes
 RESET	= \033[0m
@@ -14,27 +15,36 @@ CC = clang++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Sources
-SRC =	main_ft.cpp
+SRC_FT  =	main_ft.cpp
+SRC_STD =	main_std.cpp
 
-OBJ = $(patsubst %.cpp,%.o, $(SRC))
+OBJ_FT = $(patsubst %.cpp,%.o, $(SRC_FT))
+OBJ_STD = $(patsubst %.cpp,%.o, $(SRC_STD))
 
-all: $(NAME)
+all: $(NAME_FT) $(NAME_STD)
 
 %.o : %.cpp
 	@$(CC) -c $(FLAGS) $< -o $@
 
-$(NAME): $(OBJ)
-	@echo "$(YELLOW)\n      -> Building $(NAME) ...$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
+$(NAME_FT): $(OBJ_FT)
+	@echo "$(YELLOW)\n      -> Building $(NAME_FT) ...$(RESET)"
+	@$(CC) $(FLAGS) $(OBJ_FT) -o $(NAME_FT)
+	@echo "$(GREEN)***   Project $(NAME_FT) successfully compiled   ***\n$(RESET)"
+	@rm -f ./*.o
+
+$(NAME_STD): $(OBJ_STD)
+	@echo "$(YELLOW)\n      -> Building $(NAME_STD) ...$(RESET)"
+	@$(CC) $(FLAGS) $(OBJ_STD) -o $(NAME_STD)
+	@echo "$(GREEN)***   Project $(NAME_STD) successfully compiled   ***\n$(RESET)"
 	@rm -f ./*.o
 
 clean:
-	@echo "$(BLUE)***   Deleting all objects from $(NAME)   ...   ***$(RESET)"
+	@echo "$(BLUE)***   Deleting objects  ...   ***$(RESET)"
 	@rm -f ./*.o
 
 fclean: clean
-	@echo "$(BLUE)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
-	@rm -f ./$(NAME)
+	@echo "$(BLUE)***   Deleting executables   ...   ***$(RESET)"
+	@rm -f ./$(NAME_FT)
+	@rm -f ./$(NAME_STD)
 
 re: fclean all

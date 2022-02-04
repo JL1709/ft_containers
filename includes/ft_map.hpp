@@ -6,16 +6,13 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:16:01 by julian            #+#    #+#             */
-/*   Updated: 2022/02/01 15:26:43 by julian           ###   ########.fr       */
+/*   Updated: 2022/02/04 14:09:21 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MAP_HPP
 #define FT_MAP_HPP
 
-#include <map>
-#include <iterator>
-#include <functional>
 #include <memory>
 #include <cstddef>
 #include "ft_utility.hpp"
@@ -113,7 +110,7 @@ namespace ft
 
 	// Element access
 	
-			T& operator[](const Key& key) {return (*((this->insert(make_pair(key, T()))).first)).second;}
+			T& operator[](const Key& key) {return (*((this->insert(ft::make_pair(key, T()))).first)).second;}
 
 	// Iterators
 	
@@ -134,7 +131,7 @@ namespace ft
 
 	// Modifiers
 	
-			void clear(); //TODO!!!!!
+			void clear() {t.clear();}
 			
 			ft::pair<iterator, bool> insert(const value_type& value) {return t.insert(value);}
 			
