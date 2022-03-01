@@ -1,5 +1,6 @@
 #include "common.hpp"
 #include <list>
+#include <set>
 
 #define T1 int
 typedef TESTED_NAMESPACE::set<T1>::iterator ft_iterator;

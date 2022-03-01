@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_random_access_iterator.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/03/01 19:22:40 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/01 21:58:43 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ namespace ft
 			~random_access_iterator() {}
 
 			// casting operator
-			operator random_access_iterator<const T>() const { return this->_ptr; }
+			operator random_access_iterator<const T>() const {return this->_ptr;}
 			
 			random_access_iterator&	operator=(const random_access_iterator<T>& rhs) {_ptr = rhs.base(); return (*this);}
 			random_access_iterator&	operator=(pointer ptr) {_ptr = ptr; return (*this);}

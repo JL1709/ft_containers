@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iterator.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:55:36 by julian            #+#    #+#             */
-/*   Updated: 2022/03/01 20:03:18 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/01 22:04:02 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ namespace ft
 
 	template < class T1, class T2 >
 	typename reverse_iterator<T1>::difference_type
-	operator-(const reverse_iterator<T1>& x, const reverse_iterator<T2>& y) {return (x.base() - y.base());}
+	operator-(const reverse_iterator<T1>& x, const reverse_iterator<T2>& y) {return (y.base() - x.base());}
 }
 
 #endif
