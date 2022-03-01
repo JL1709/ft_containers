@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/02/04 14:00:47 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/01 20:07:51 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ namespace ft
 			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), \
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0) : _alloc(alloc)
 			{
-				size_type n = last - first;
+				size_type n = 0;
+				for (InputIterator it = first; it != last && n <= this->max_size(); ++it)
+					n++;
 				_capacity = _getCapacity(n);
 				_first = _alloc.allocate(_capacity);
 				_last = _first;
@@ -109,10 +111,10 @@ namespace ft
 			iterator				end() {return iterator(_last);}
 			const_iterator			begin() const {return const_iterator(_first);}
 			const_iterator			end() const {return const_iterator(_last);}
-			reverse_iterator		rbegin() {return reverse_iterator(_last);}
+			reverse_iterator		rbegin() {return reverse_iterator(iterator(_last));}
 			reverse_iterator		rend() {return reverse_iterator(_first);}
-			const_reverse_iterator	rbegin() const {return const_reverse_iterator(_last);}
-			const_reverse_iterator	rend() const {return const_reverse_iterator(_first);}
+			const_reverse_iterator	rbegin() const {return _last;}
+			const_reverse_iterator	rend() const {return _first;}
 
 			/* -------------------- Capacity -------------------- */
 		
@@ -212,7 +214,9 @@ namespace ft
 						typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 			{
 				this->clear();
-				size_type n = last - first;
+				size_type n = 0;
+				for (InputIterator it = first; it != last && n <= this->max_size(); ++it)
+					n++;
 				if (_capacity >= n)
 				{
 					for (size_type i = 0; i < n; i++)
@@ -251,7 +255,9 @@ namespace ft
 			iterator insert(iterator position, const value_type& val)
 			{
 				ft::vector<T> tmp(*this);
-				size_type pos = position - _first;
+				size_type pos = 0;
+				for (iterator it = _first; it != position; ++it)
+					pos++;
 				size_type n = (pos > size()) ? pos : size();
 				
 				this->clear();
@@ -280,7 +286,9 @@ namespace ft
 			void insert(iterator position, size_type count, const value_type& val)
 			{
 				ft::vector<T> tmp(*this);
-				size_type pos = position - _first;
+				size_type pos = 0;
+				for (iterator it = _first; it != position; ++it)
+					pos++;
 				size_type n = (pos > size()) ? pos : size();
 				
 				this->clear();
@@ -314,10 +322,13 @@ namespace ft
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
 			{
 				ft::vector<T> tmp(*this);
-				size_type pos = position - _first;
+				size_type pos = 0;
+				for (iterator it = _first; it != position; ++it)
+					pos++;
 				size_type n = (pos > size()) ? pos : size();
-				size_type count = last - first;
-				
+				size_type count = 0;
+				for (InputIterator it = first; it != last && count <= this->max_size(); ++it)
+					count++;
 				this->clear();
 				this->~vector();
 				_alloc = tmp._alloc;
@@ -356,7 +367,9 @@ namespace ft
 				else
 				{
 					size_type size = this->size();
-					size_type pos = position - _first;
+					size_type pos = 0;
+					for (iterator it = _first; it != position; ++it)
+						pos++;
 					if (pos < 0 || pos > size)
 						pos = 0;
 					size_type i = 0;
@@ -384,8 +397,12 @@ namespace ft
 				else
 				{
 					size_type size = this->size();
-					size_type start = first - _first;
-					size_type end = last - _first;
+					size_type start = 0;
+					for (iterator it = _first; it != first; ++it)
+						start++;
+					size_type end = 0;
+					for (iterator it = _first; it != last; ++it)
+						end++;
 					size_type range = end - start;
 					size_type i = 0;
 					int found = 0;
@@ -408,25 +425,12 @@ namespace ft
 
 			void swap(vector& x)
 			{
-				pointer			tmp_first;
-				pointer			tmp_last;
-				size_type		tmp_capacity;
-				allocator_type	tmp_alloc;
-
 				if (this == &x)
 					return ;
-				tmp_first = _first;
-				tmp_last = _last;
-				tmp_capacity = _capacity;
-				tmp_alloc = _alloc;
-				_first = x._first;
-				_last = x._last;
-				_capacity = x._capacity;
-				_alloc = x._alloc;
-				x._first = tmp_first;
-				x._last = tmp_last;
-				x._capacity = tmp_capacity;
-				x._alloc = tmp_alloc;
+				ft::swap(_first, x._first);
+				ft::swap(_last, x._last);
+				ft::swap(_capacity, x._capacity);
+				ft::swap(_alloc, x._alloc);
 			}
 
 			void clear()
