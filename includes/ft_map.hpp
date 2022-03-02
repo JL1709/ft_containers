@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:16:01 by julian            #+#    #+#             */
-/*   Updated: 2022/02/04 14:09:21 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/02 19:28:08 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FT_MAP_HPP
 
 #include <memory>
+#include <map>
 #include <cstddef>
 #include "ft_utility.hpp"
 #include "ft_iterator.hpp"
@@ -56,10 +57,12 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::iterator			iterator;
-			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator	const_iterator;
-			typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
-			typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator			iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator			const_iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_reverse_iterator	reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_reverse_iterator	const_reverse_iterator;
+			// typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+			// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 /* MEMBER Objects------------------------------------------------------------ */
 		private:
@@ -110,7 +113,7 @@ namespace ft
 
 	// Element access
 	
-			T& operator[](const Key& key) {return (*((this->insert(ft::make_pair(key, T()))).first)).second;}
+			T& operator[](const Key& key) {return (*((insert(value_type(key, T()))).first)).second;}
 
 	// Iterators
 	
@@ -118,10 +121,10 @@ namespace ft
 			iterator				end() {return t.end();}
 			const_iterator			begin() const {return t.begin();}
 			const_iterator			end() const {return t.end();}
-			reverse_iterator		rbegin() {return t.rbegin();}
-			reverse_iterator		rend() {return t.rend();}
-			const_reverse_iterator	rbegin() const {return t.rbegin();}
-			const_reverse_iterator	rend() const {return t.rend();}
+			reverse_iterator		rbegin() {return reverse_iterator(end());}
+			reverse_iterator		rend() {return reverse_iterator(begin());}
+			const_reverse_iterator	rbegin() const {return const_reverse_iterator(end());}
+			const_reverse_iterator	rend() const {return const_reverse_iterator(begin());}
 
 	// Capacity
 	
@@ -138,7 +141,11 @@ namespace ft
 			iterator insert(iterator pos, const value_type& value) {return t.insert(pos, value);}
 			
 			template<class InputIterator>
-			void insert(InputIterator first, InputIterator last) {t.insert(first, last);}
+			void insert(InputIterator first, InputIterator last) // {t.insert(first, last);}
+			{
+				while (first != last)
+					this->insert(*first++);				
+			}
 
 			void erase(iterator pos) {t.erase(pos);}
 			void erase(iterator first, iterator last) {t.erase(first, last);}

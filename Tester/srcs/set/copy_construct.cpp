@@ -9,6 +9,7 @@ int		main(void)
 	unsigned int lst_size = 7;
 	for (unsigned int i = 0; i < lst_size; ++i)
 		lst.push_back(lst_size - i);
+	printSize(lst);
 
 	TESTED_NAMESPACE::set<T1> st(lst.begin(), lst.end());
 	TESTED_NAMESPACE::set<T1>::iterator it = st.begin(), ite = st.end();

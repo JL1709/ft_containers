@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_iterator.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:55:36 by julian            #+#    #+#             */
-/*   Updated: 2022/03/01 22:04:02 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/02 18:16:28 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,18 @@ namespace ft
 
 		public:
 			reverse_iterator() : current() {}
-			explicit reverse_iterator (iterator_type x) : current(x) {};
+			explicit reverse_iterator(iterator_type x) : current(x) {}
 			
 			template<class U>
-			reverse_iterator (const reverse_iterator<U>& other) : current(other.base()) {}
+			reverse_iterator(const reverse_iterator<U>& other) : current(other.base()) {}
 
 			template <class U>
 			reverse_iterator&	operator=(const reverse_iterator<U>& other) {current = other.base(); return *this;}
 			
 			iterator_type		base() const {return current;}
+
+			// casting operator
+			operator reverse_iterator<const Iterator>() const {return this->current;}
 
 			reference			operator* () const {Iterator tmp = current; return *--tmp;}
 			pointer				operator->() const {return std::addressof(operator*());}

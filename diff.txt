@@ -1,0 +1,16 @@
+425,431c425,431
+< ------------------------------------------------------
+< [0m[36mTime taken by program for FT_STACK  is 0.000036000 sec
+< [0m[36mTime taken by program for FT_VECTOR is 0.000119000 sec
+< [0m[36mTime taken by program for FT_MAP    is 0.000514000 sec
+< [0m[36mTime taken by program for FT_SET    is 0.000469000 sec
+< [0m[34m------------------------------------------------------
+< FT_TOTAL                               0.001138000 sec
+---
+> -------------------------------------------------------
+> [0m[36mTime taken by program for STD_STACK  is 0.000042000 sec
+> [0m[36mTime taken by program for STD_VECTOR is 0.000134000 sec
+> [0m[36mTime taken by program for STD_MAP    is 0.000749000 sec
+> [0m[36mTime taken by program for STD_SET    is 0.000672000 sec
+> [0m[34m-------------------------------------------------------
+> STD_TOTAL                               0.001597000 sec

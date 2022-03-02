@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:22:23 by julian            #+#    #+#             */
-/*   Updated: 2022/03/01 22:39:32 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/02 19:04:56 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,16 @@ namespace ft
 			typedef Compare											key_compare;
 			typedef Compare											value_compare;
 			typedef Allocator										allocator_type;
-			typedef value_type&										reference;
-			typedef const value_type&								const_reference;
+			typedef typename allocator_type::reference				reference;
+			typedef typename allocator_type::const_reference 		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer 			const_pointer;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::iterator			iterator;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_iterator	const_iterator;
-			typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
-			typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator; 
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_iterator			iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_iterator			const_iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_reverse_iterator	reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_reverse_iterator	const_reverse_iterator;
+			// typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+			// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator; 
 
 /* MEMBER Objects------------------------------------------------------------ */
 		private:
@@ -82,14 +84,12 @@ namespace ft
 			set(const set& other) : t(other.t, false) {}
 
 			virtual ~set() {}
-			
+	
 			set& operator=(const set& other)
 			{
 				t = other.t;
 				return *this;
 			}
-
-			allocator_type get_allocator() const {return _alloc;}
 
 	// Iterators
 
@@ -97,10 +97,10 @@ namespace ft
 			iterator				end() {return t.end();}
 			const_iterator			begin() const {return t.begin();}
 			const_iterator			end() const {return t.end();}
-			reverse_iterator		rbegin() {return t.rbegin();}
-			reverse_iterator		rend() {return t.rend();}
-			const_reverse_iterator	rbegin() const {return t.rbegin();}
-			const_reverse_iterator	rend() const {return t.rend();}
+			reverse_iterator		rbegin() {return reverse_iterator(end());}
+			reverse_iterator		rend() {return reverse_iterator(begin());}
+			const_reverse_iterator	rbegin() const {return const_reverse_iterator(end());}
+			const_reverse_iterator	rend() const {return const_reverse_iterator(begin());}
 
 	// Capacity
 
@@ -114,7 +114,7 @@ namespace ft
 
 			ft::pair<iterator, bool> insert(const value_type& value) {return t.insert(value);}
 
-			iterator insert(iterator pos, const value_type& value) {return t.insert(pos, value);}
+			iterator insert(const_iterator pos, const value_type& value) {return t.insert(pos, value);}
 
 			template<class InputIterator>
 			void insert(InputIterator first, InputIterator last) // {t.insert(first, last);}
@@ -123,8 +123,8 @@ namespace ft
 					this->insert(*first++);
 			}
 
-			void erase(iterator pos) {t.erase(pos);}
-			void erase(iterator first, iterator last) {t.erase(first, last);}
+			void erase(const_iterator pos) {t.erase(pos);}
+			void erase(const_iterator first, const_iterator last) {t.erase(first, last);}
 			size_type erase(const Key& key) {return t.erase(key);}
 
 			void swap(set& other) {t.swap(other.t);}

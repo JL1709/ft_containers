@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bidirectional_iterator.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/02/04 14:02:28 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/02 19:04:08 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,45 @@ namespace ft
 		protected:
 			pointer	_ptr;
 	};
+
+	template<typename BidirectionalIterator, typename T, typename Reference, typename pointer, typename Distance>
+	class reverse_bidirectional_iterator : public bidirectional_iterator<T, Distance> 
+	{
+   			typedef reverse_bidirectional_iterator<BidirectionalIterator, T, Reference, pointer, Distance> self;
+
+		protected:
+    		BidirectionalIterator current;
+	
+		public:
+			reverse_bidirectional_iterator() {}
+			reverse_bidirectional_iterator(BidirectionalIterator x) : current(x) {}
+
+			template<class U>
+			reverse_bidirectional_iterator(const self& other) : current(other.base()) {}
+			
+			BidirectionalIterator const& base() const { return current; }
+			
+			Reference operator*() const {BidirectionalIterator tmp = current; return *--tmp;}
+			pointer	operator->() const {return std::addressof(operator*());}
+			self& operator++() {--current; return *this;}
+			self operator++(int) {self tmp = *this;	--current; return tmp;}
+			self& operator--() {++current; return *this;}
+			self operator--(int) {self tmp = *this;	++current; return tmp;}
+	};
+
+	template<class Iterator1, class Iterator2, class T, class Reference, class pointer, class Distance>
+	bool operator==(const ft::reverse_bidirectional_iterator<Iterator1, T, Reference, pointer, Distance>& lhs,
+					const ft::reverse_bidirectional_iterator<Iterator2, T, Reference, pointer, Distance>& rhs)
+	{
+		return (lhs.base() == rhs.base());
+	}
+	
+	template<class Iterator1, class Iterator2, class T, class Reference, class pointer, class Distance>
+	bool operator!=(const ft::reverse_bidirectional_iterator<Iterator1, T, Reference, pointer, Distance>& lhs,
+					const ft::reverse_bidirectional_iterator<Iterator2, T, Reference, pointer, Distance>& rhs)
+	{
+		return (lhs.base() != rhs.base());
+	}
 }
 
 #endif
