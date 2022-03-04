@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/03/04 14:54:57 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/04 18:23:10 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,38 +389,19 @@ namespace ft
 					return (position);
 				}
 			}
-			
+
 			iterator erase(iterator first, iterator last)
 			{
-				if ((last - first) == 0)
-					return (_last);
-				else
-				{
-					size_type size = this->size();
-					size_type start = 0;
-					for (iterator it = _first; it != first; ++it)
-						start++;
-					size_type end = 0;
-					for (iterator it = _first; it != last; ++it)
-						end++;
-					size_type range = end - start;
-					size_type i = 0;
-					int found = 0;
-					while (i < (size - range))
-					{
-						if (i == start || found == 1)
-						{
-							_first[i] = _first[i + range];
-							found = 1;
-						}
-						else
-							_first[i] = _first[i];
-						i++;
-					}
-					while (range--)
-						_alloc.destroy(--_last);
-					return (this->end() - 1);
-				}
+				size_type start = 0;
+				for (iterator it = _first; it != first; ++it)
+					start++;
+				size_type end = 0;
+				for (iterator it = _first; it != last; ++it)
+					end++;
+				size_type range = end - start;
+				while (range--)
+					this->erase(first);
+				return first;
 			}
 
 			void swap(vector& x)
