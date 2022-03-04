@@ -5,6 +5,8 @@
 void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 					TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
 {
+	std::cout << "it        = " << *it << std::endl;
+	std::cout << "vct.begin = " << *vct.begin() << std::endl;
 	static int i = 0;
 	std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
 	printSize(vct);

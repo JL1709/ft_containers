@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:22:23 by julian            #+#    #+#             */
-/*   Updated: 2022/03/02 19:04:56 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/04 13:52:52 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ namespace ft
 				t = other.t;
 				return *this;
 			}
+
+			allocator_type get_allocator() const {return _alloc;}
 
 	// Iterators
 
