@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:16:01 by julian            #+#    #+#             */
-/*   Updated: 2022/03/02 19:28:08 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/05 11:39:22 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator			iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::iterator					iterator;
 			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator			const_iterator;
-			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_reverse_iterator	reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::reverse_iterator			reverse_iterator;
 			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_reverse_iterator	const_reverse_iterator;
 			// typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
 			// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
@@ -103,7 +103,7 @@ namespace ft
 			
 			virtual ~map() {}
 
-			map& operator=(const map& other)
+			map &operator=(const map& other)
 			{
 				t = other.t;
 				return *this;
@@ -113,7 +113,7 @@ namespace ft
 
 	// Element access
 	
-			T& operator[](const Key& key) {return (*((insert(value_type(key, T()))).first)).second;}
+			T& operator[](const Key& key) {return (*((t.insert(ft::make_pair(key, T()))).first)).second;}
 
 	// Iterators
 	

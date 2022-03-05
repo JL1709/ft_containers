@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bidirectional_iterator.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/03/02 19:04:08 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/05 11:32:41 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,17 @@ namespace ft
 			reverse_bidirectional_iterator() {}
 			reverse_bidirectional_iterator(BidirectionalIterator x) : current(x) {}
 
-			template<class U>
-			reverse_bidirectional_iterator(const self& other) : current(other.base()) {}
+			template<typename BiIt2, typename T2, typename Reference2, typename pointer2, typename Distance2>
+			reverse_bidirectional_iterator(const reverse_bidirectional_iterator<BiIt2, T2, Reference2, pointer2, Distance2>& other) : current(other.base()) {}
+			
+			reverse_bidirectional_iterator(self& other) : current(other.base()) {}
 			
 			BidirectionalIterator const& base() const { return current; }
+			BidirectionalIterator base() { return current; }
 			
 			Reference operator*() const {BidirectionalIterator tmp = current; return *--tmp;}
+			Reference operator*() {BidirectionalIterator tmp = current; return *--tmp;}
+			pointer	operator->() {return std::addressof(operator*());}
 			pointer	operator->() const {return std::addressof(operator*());}
 			self& operator++() {--current; return *this;}
 			self operator++(int) {self tmp = *this;	--current; return tmp;}

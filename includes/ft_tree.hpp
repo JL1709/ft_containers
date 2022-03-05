@@ -122,10 +122,13 @@ class rb_tree
 				iterator(link_type x) : node(x) {}
 			public:
 				iterator() {}
-				// iterator(const iterator& x) : node(x.node) {}
-				bool operator==(const iterator& y) const { return node == y.node; }
+				iterator(const iterator& x) : node(x.node) {}
+				bool operator==(const iterator& y) { return node == y.node; }
+				bool operator==(const const_iterator& y) const { return node == y.node; }
 				bool operator!=(const iterator& y) const { return node != y.node; }
+				reference operator*() { return value(node); }
 				reference operator*() const { return value(node); }
+				pointer operator->() { return &(value(node));}
 				pointer operator->() const { return &(value(node));}
 				iterator& operator++()
 				{
@@ -198,6 +201,8 @@ class rb_tree
 				bool operator==(const const_iterator& y) const {return node == y.node;}
 				bool operator!=(const const_iterator& y) const {return node != y.node;}
 				const_reference operator*() const { return value(node); }
+				const_reference operator*() { return value(node); }
+				const_pointer operator->() { return &(value(node)); }
 				const_pointer operator->() const { return &(value(node)); }
 				const_iterator& operator++()
 				{
