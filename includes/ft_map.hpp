@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:16:01 by julian            #+#    #+#             */
-/*   Updated: 2022/03/05 11:39:22 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/11 09:28:36 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define FT_MAP_HPP
 
 #include <memory>
-#include <map>
 #include <cstddef>
 #include "ft_utility.hpp"
 #include "ft_iterator.hpp"

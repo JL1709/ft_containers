@@ -1,5 +1,5 @@
-# Name of the program
-NAME_FT  = ft_containers
+# Name of the programs
+NAME_FT = ft_containers
 NAME_STD = std_containers
 
 # Color codes
@@ -12,39 +12,49 @@ BLUE	= \033[34m
 CC = clang++
 
 # Compiling flags
-FLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Sources
-SRC_FT  =	main_ft.cpp
-SRC_STD =	main_std.cpp
+SRC = main.cpp
 
-OBJ_FT = $(patsubst %.cpp,%.o, $(SRC_FT))
-OBJ_STD = $(patsubst %.cpp,%.o, $(SRC_STD))
+HDIR = includes
+ODIR = objects
+SDIR = sources
+INCLUDES = -I../$(HDIR)
+BINARIES = $(NAME_FT) $(NAME_STD)
 
-all: $(NAME_FT) $(NAME_STD)
+project: $(BINARIES)
 
-%.o : %.cpp
-	@$(CC) -c $(FLAGS) $< -o $@
-
-$(NAME_FT): $(OBJ_FT)
-	@echo "$(YELLOW)\n      -> Building $(NAME_FT) ...$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ_FT) -o $(NAME_FT)
+$(NAME_FT): $(ODIR)/main.o
+	@$(CC) -o $@ $^
 	@echo "$(GREEN)***   Project $(NAME_FT) successfully compiled   ***\n$(RESET)"
-	@rm -f ./*.o
+$(ODIR)/main.o: $(SDIR)/main.cpp $(HDIR)/*.hpp
+	@echo "$(YELLOW)\n      -> Building $(NAME_FT) ...$(RESET)"
+	@cd $(ODIR) && $(CC) $(INCLUDES) $(CFLAGS) -c ../$< -o main.o
 
-$(NAME_STD): $(OBJ_STD)
-	@echo "$(YELLOW)\n      -> Building $(NAME_STD) ...$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ_STD) -o $(NAME_STD)
+$(NAME_STD): $(ODIR)/main2.o
+	@$(CC) -o $@ $^
 	@echo "$(GREEN)***   Project $(NAME_STD) successfully compiled   ***\n$(RESET)"
-	@rm -f ./*.o
+$(ODIR)/main2.o: $(SDIR)/main.cpp $(HDIR)/*.hpp
+	@echo "$(YELLOW)\n      -> Building $(NAME_STD) ...$(RESET)"	
+	@cd $(ODIR) && $(CC) -D STD $(INCLUDES) $(CFLAGS) -c ../$< -o main2.o
+
+.PHONY: clean fclean re bonus all
+
+all:
+	make
 
 clean:
-	@echo "$(BLUE)***   Deleting objects  ...   ***$(RESET)"
-	@rm -f ./*.o
+	@rm -f $(ODIR)/*.o
 
 fclean: clean
-	@echo "$(BLUE)***   Deleting executables   ...   ***$(RESET)"
-	@rm -f ./$(NAME_FT)
-	@rm -f ./$(NAME_STD)
+	@echo "$(BLUE)***   Deleting objects  ...   ***$(RESET)"
+	@rm -f $(BINARIES)
 
-re: fclean all
+re:
+	@echo "$(BLUE)***   Deleting executables   ...   ***$(RESET)"
+	@make fclean
+	@make project
+
+bonus:
+	make
