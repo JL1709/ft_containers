@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:47:05 by julian            #+#    #+#             */
-/*   Updated: 2022/03/11 13:39:45 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/11 18:38:17 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,7 +400,7 @@ int main()
 	// start timer
 	clock_gettime(CLOCK_MONOTONIC, &timeStart);
 	NAMESPACE::vector<int> perfV;
-	for (size_t i = 0; i < 10000000; ++i)
+	for (size_t i = 0; i < 100000; ++i)
 			perfV.push_back(std::rand());
 	NAMESPACE::vector<int> perfV2(perfV);
 	NAMESPACE::vector<int> perfV3;

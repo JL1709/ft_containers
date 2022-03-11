@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/03/11 13:49:09 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/11 18:36:23 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,53 +357,27 @@ namespace ft
 
 			iterator erase(iterator position)
 			{
-				if (position >= end())
-					return (end());
-				if ((position == end() - 1))
-				{
-					_alloc.destroy(--_last);
-					return (end());
-				}
-				else
-				{
-					size_type size = this->size();
-					size_type pos = 0;
-					for (iterator it = _first; it != position; ++it)
-						pos++;
-					if (pos < 0 || pos > size)
-						pos = 0;
-					size_type i = 0;
-					int found = 0;
-					while (i < size - 1)
-					{
-						if (i == pos || found == 1)
-						{
-							_first[i] = _first[i + 1];
-							found = 1;
-						}
-						else
-							_first[i] = _first[i];
-						i++;
-					}
-					_alloc.destroy(--_last);
-					return (position);
-				}
+				for(size_type i = position - this->begin(); i < this->size() - 1; ++i)
+					_first[i] = _first[i + 1];
+				_alloc.destroy(--_last);
+				return (position);		
 			}
 
 			iterator erase(iterator first, iterator last)
 			{
-				ft::vector<T>::iterator it = std::copy
-				// size_type start = 0;
-				// for (iterator it = _first; it != first; ++it)
-				// 	start++;
-				// size_type end = 0;
-				// for (iterator it = _first; it != last; ++it)
-				// 	end++;
-				// size_type range = end - start;
-				// while (range--)
-				// 	this->erase(first);
-				for (; first != last; ++first)
-					this->erase(first);
+				size_type start = 0;
+				for (iterator it = _first; it != first; ++it)
+					start++;
+				size_type end = 0;
+				for (iterator it = _first; it != last; ++it)
+					end++;
+				size_type range = end - start;
+				for (size_type i = 0; i < this->size() - range; ++i, ++start)
+					_first[start] = _first[start + range];
+				
+				for (size_type i = 0; i < range; ++i)
+					_alloc.destroy(--_last);
+				
 				return first;
 			}
 
