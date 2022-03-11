@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 18:25:51 by julian            #+#    #+#             */
-/*   Updated: 2022/03/04 18:23:10 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/11 13:49:09 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,14 +392,17 @@ namespace ft
 
 			iterator erase(iterator first, iterator last)
 			{
-				size_type start = 0;
-				for (iterator it = _first; it != first; ++it)
-					start++;
-				size_type end = 0;
-				for (iterator it = _first; it != last; ++it)
-					end++;
-				size_type range = end - start;
-				while (range--)
+				ft::vector<T>::iterator it = std::copy
+				// size_type start = 0;
+				// for (iterator it = _first; it != first; ++it)
+				// 	start++;
+				// size_type end = 0;
+				// for (iterator it = _first; it != last; ++it)
+				// 	end++;
+				// size_type range = end - start;
+				// while (range--)
+				// 	this->erase(first);
+				for (; first != last; ++first)
 					this->erase(first);
 				return first;
 			}
