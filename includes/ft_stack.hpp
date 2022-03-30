@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stack.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 16:07:37 by jludt             #+#    #+#             */
-/*   Updated: 2022/01/24 11:17:27 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/30 10:56:21 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,15 @@ namespace ft
 
 			template <class T1, class C1>
 			friend bool operator<(const stack<T1,C1>& lhs, const stack<T1,C1>& rhs);
-	
 	};
 
 /* NON-MEMBER FUNCTION OVERLOADS --------------------------------------------- */
 
-
 	template <class T, class Container>
 	bool operator==(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {return (lhs.c == rhs.c);}
 
-
 	template <class T, class Container>
 	bool operator!=(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {{return !(lhs == rhs);}}
-
 
 	template <class T, class Container>
 	bool operator<(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {return (lhs.c < rhs.c);}
@@ -75,10 +71,8 @@ namespace ft
 	template <class T, class Container>
 	bool operator<=(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {return !(rhs < lhs);}
 
-
 	template <class T, class Container>
 	bool operator>(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {return (rhs < lhs);}
-
 
 	template <class T, class Container>
 	bool operator>=(const stack<T,Container>& lhs, const stack<T,Container>& rhs) {return !(lhs < rhs);}

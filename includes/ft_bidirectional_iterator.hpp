@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bidirectional_iterator.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/03/05 11:32:41 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/30 10:18:12 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include "ft_iterator.hpp"
 #include <cstddef>
-#include "ft_nullptr.hpp"
 
 namespace ft
 {
@@ -31,7 +30,7 @@ namespace ft
 			typedef T&								reference;
 		
 		public:
-			bidirectional_iterator() : _ptr(ft_nullptr) {}
+			bidirectional_iterator() : _ptr(NULL) {}
 			bidirectional_iterator(pointer rhs) : _ptr(rhs) {}
 			bidirectional_iterator(const bidirectional_iterator& rhs) : _ptr(rhs._ptr) {}
 			~bidirectional_iterator() {}

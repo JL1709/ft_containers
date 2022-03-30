@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_random_access_iterator.hpp                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/03/04 18:34:28 by julian           ###   ########.fr       */
+/*   Updated: 2022/03/30 10:18:16 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #define FT_RANDOM_ACCESS_ITERATOR_HPP
 
 #include "ft_iterator.hpp"
-#include "ft_nullptr.hpp"
 
 namespace ft
 {
@@ -33,7 +32,7 @@ namespace ft
 			typedef T&								reference;
 		
 		public:
-			random_access_iterator() : _ptr(ft_nullptr) {}
+			random_access_iterator() : _ptr(NULL) {}
 			random_access_iterator(pointer rhs) : _ptr(rhs) {}
 			random_access_iterator(const random_access_iterator<T>& rhs) : _ptr(rhs._ptr) {}
 			~random_access_iterator() {}

@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:22:23 by julian            #+#    #+#             */
-/*   Updated: 2022/03/04 13:52:52 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/30 10:39:02 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ namespace ft
 			iterator insert(const_iterator pos, const value_type& value) {return t.insert(pos, value);}
 
 			template<class InputIterator>
-			void insert(InputIterator first, InputIterator last) // {t.insert(first, last);}
+			void insert(InputIterator first, InputIterator last)
 			{
 				while (first != last)
 					this->insert(*first++);

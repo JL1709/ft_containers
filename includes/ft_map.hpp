@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:16:01 by julian            #+#    #+#             */
-/*   Updated: 2022/03/11 09:28:36 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/30 10:38:55 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ namespace ft
 			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_iterator			const_iterator;
 			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::reverse_iterator			reverse_iterator;
 			typedef typename rb_tree<key_type, value_type, select1st<value_type, key_type>, key_compare>::const_reverse_iterator	const_reverse_iterator;
-			// typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
-			// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 /* MEMBER Objects------------------------------------------------------------ */
 		private:
@@ -140,7 +138,7 @@ namespace ft
 			iterator insert(iterator pos, const value_type& value) {return t.insert(pos, value);}
 			
 			template<class InputIterator>
-			void insert(InputIterator first, InputIterator last) // {t.insert(first, last);}
+			void insert(InputIterator first, InputIterator last)
 			{
 				while (first != last)
 					this->insert(*first++);				

@@ -38,7 +38,6 @@ class rb_tree
 		typedef typename std::allocator<Node>::difference_type		difference_type;
 
 	protected:
-
 		template <class T>
 		const T& max(const T& a, const T& b) {return  a < b ? b : a;}
 	    size_type init_page_size() {return max(size_type(1), size_type(4096/sizeof(Key)));}
@@ -76,7 +75,6 @@ class rb_tree
 				(free_list = (link_type)(free_list->right_link), tmp) 
 					: (next_avail == last ? (add_new_buffer(), next_avail++) 
 					: next_avail++);
-			// ugly code for inlining - avoids multiple returns
 		}
 		void put_node(link_type p)
 		{
@@ -93,8 +91,7 @@ class rb_tree
 		link_type& rightmost() { return right(header); }
 		link_type& rightmost() const { return right(header); }
 		size_type node_count; // keeps track of size of tree
-		bool insert_always;  // controls whether an element already in the
-								// tree is inserted again
+		bool insert_always;   // checks whether an element already in the tree is inserted again
 
 		Compare key_compare;
 		static link_type NIL;
@@ -114,7 +111,6 @@ class rb_tree
 		friend class const_iterator;
 		class iterator : public ft::bidirectional_iterator<Value, difference_type>
 		{
-			// typedef ft::bidirectional_iterator_tag iterator_category;
 			friend class rb_tree<Key, Value, KeyOfValue, Compare>;
 			friend class const_iterator;
 			protected:
@@ -146,7 +142,7 @@ class rb_tree
 							node = y;
 							y = parent(y);
 						}
-						if (right(node) != y) // necessary because of rightmost 
+						if (right(node) != y)
 							node = y;
 					}
 					return *this;
@@ -160,8 +156,7 @@ class rb_tree
 				iterator& operator--()
 				{
 					if (color(node) == red && parent(parent(node)) == node)  
-						// check for header
-						node = right(node);   // return rightmost
+						node = right(node);
 					else if (left(node) != NIL)
 					{
 						link_type y = left(node);
@@ -189,7 +184,6 @@ class rb_tree
 		};
 		class const_iterator : public ft::bidirectional_iterator<Value, difference_type>
 		{
-			// typedef ft::bidirectional_iterator_tag iterator_category;
 			friend class rb_tree<Key, Value, KeyOfValue, Compare>;
 			friend class iterator;
 			protected:
@@ -220,7 +214,7 @@ class rb_tree
 							node = y;
 							y = parent(y);
 						}
-						if (right(node) != y) // necessary because of rightmost 
+						if (right(node) != y)
 							node = y;
 					}
 					return *this;
@@ -234,8 +228,7 @@ class rb_tree
 				const_iterator& operator--()
 				{
 					if (color(node) == red && parent(parent(node)) == node)  
-						// check for header
-						node = right(node);   // return rightmost
+						node = right(node);
 					else if (left(node) != NIL) {
 						link_type y = left(node);
 						while (right(y) != NIL)
@@ -259,16 +252,13 @@ class rb_tree
 				}
 		};
 
-		typedef ft::reverse_bidirectional_iterator<iterator, value_type, reference, pointer, difference_type> 			 reverse_iterator; 
+		typedef ft::reverse_bidirectional_iterator<iterator, value_type, reference, pointer, difference_type> 					reverse_iterator; 
     	typedef ft::reverse_bidirectional_iterator<const_iterator, value_type, const_reference, const_pointer, difference_type> const_reverse_iterator;
-
-		// typedef ft::reverse_iterator<const_iterator>	reverse_iterator; 
-		// typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 	
 	private:
-		iterator __insert(link_type x, link_type y, const value_type& v);
-		link_type __copy(link_type x, link_type p);
-		void __erase(link_type x);
+		iterator _insert(link_type x, link_type y, const value_type& v);
+		link_type _copy(link_type x, link_type p);
+		void _erase(link_type x);
 		void init()
 		{
 			++number_of_trees;
@@ -281,17 +271,13 @@ class rb_tree
 				right(NIL) = 0;
 			}
 			header = get_node();
-			color(header) = red;  // used to distinguish header from root,
-								// in iterator.operator++
+			color(header) = red;
 			root() = NIL;
 			leftmost() = header;
 			rightmost() = header;
 		}
 	
-	public:
-    
-	// allocation/deallocation
-		
+	public:	
 		rb_tree(const Compare& comp = Compare(), bool always = false) : node_count(0), insert_always(always), key_compare(comp) 
 		{
 			init();
@@ -306,7 +292,7 @@ class rb_tree
 			++number_of_trees;
 			header = get_node();
 			color(header) = red;
-			root() = __copy(x.root(), header);
+			root() = _copy(x.root(), header);
 			if (root() == NIL)
 			{
 				leftmost() = header;
@@ -361,7 +347,7 @@ class rb_tree
 		void clear(void);
 		
 		typedef  ft::pair<iterator, bool> pair_iterator_bool; 
-		// typedef done to get around compiler bug
+
 		pair_iterator_bool	insert(const value_type& x);
 		iterator			insert(const_iterator position, const value_type& x);
 		void				insert(const_iterator first, const_iterator last);
@@ -384,14 +370,13 @@ class rb_tree
 		iterator		upper_bound(const key_type& x);
 		const_iterator	upper_bound(const key_type& x) const;
 
-		// typedefs done to get around compiler bug
 		typedef ft::pair<iterator, iterator> pair_iterator_iterator; 
 		pair_iterator_iterator		equal_range(const key_type& x);
 		typedef  ft::pair<const_iterator, const_iterator> pair_citerator_citerator;
 		pair_citerator_citerator	equal_range(const key_type& x) const;
 
-		 void rotate_left(link_type x);
-		 void rotate_right(link_type x);
+		void rotate_left(link_type x);
+		void rotate_right(link_type x);
 }; // end of class rb_tree
 
 
@@ -465,7 +450,7 @@ rb_tree<Key, Value, KeyOfValue, Compare>& rb_tree<Key, Value, KeyOfValue, Compar
 	{
 		// can't be done as in list because Key may be a constant type
 		erase(begin(), end());
-		root() = __copy(x.root(), header);
+		root() = _copy(x.root(), header);
 		if (root() == NIL)
 		{
 			leftmost() = header;
@@ -482,11 +467,10 @@ rb_tree<Key, Value, KeyOfValue, Compare>& rb_tree<Key, Value, KeyOfValue, Compar
 }
 
 template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::__insert(link_type x, link_type y, const Value& v)
+typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::_insert(link_type x, link_type y, const Value& v)
 {
 	++node_count;
 	link_type z = get_node();
-	// value_allocator.construct(z, v);
 	value_allocator.construct(value_allocator.address(value(z)), v);
 	if (y == header || x != NIL || key_compare(KeyOfValue()(v), key(y)))
 	{
@@ -581,17 +565,17 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::pair_iterator_bool rb_tree<Ke
 		x = comp ? left(x) : right(x);
 	}
 	if (insert_always)
-		return pair_iterator_bool(__insert(x, y, v), true);
+		return pair_iterator_bool(_insert(x, y, v), true);
 	iterator j = iterator(y);
 	if (comp)
 	{
 		if (j == begin())
-			return pair_iterator_bool(__insert(x, y, v), true);
+			return pair_iterator_bool(_insert(x, y, v), true);
 		else
 			--j;
 	}
 	if (key_compare(key(j.node), KeyOfValue()(v)))
-		return pair_iterator_bool(__insert(x, y, v), true);
+		return pair_iterator_bool(_insert(x, y, v), true);
 	return pair_iterator_bool(j, false);
 }
 
@@ -601,7 +585,7 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	if (position == const_iterator(begin()))
 	{
 		if (size() > 0 && key_compare(KeyOfValue()(v), key(position.node)))
-			return __insert(position.node, position.node, v);
+			return _insert(position.node, position.node, v);
 			// first argument just needs to be non-NIL 
 		else
 			return insert(v).first;
@@ -609,7 +593,7 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	else if (position == const_iterator(end()))
 	{
 		if (key_compare(key(rightmost()), KeyOfValue()(v)))
-			return __insert(NIL, rightmost(), v);
+			return _insert(NIL, rightmost(), v);
 		else
 			return insert(v).first;
 	}
@@ -619,9 +603,9 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 		if (key_compare(key(before.node), KeyOfValue()(v)) && key_compare(KeyOfValue()(v), key(position.node)))
 		{
 			if (right(before.node) == NIL)
-				return __insert(NIL, before.node, v); 
+				return _insert(NIL, before.node, v); 
 			else
-				return __insert(position.node, position.node, v);
+				return _insert(position.node, position.node, v);
 				// first argument just needs to be non-NIL 
 		}
 		else
@@ -784,7 +768,7 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value,
 }
 
 template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::__copy(link_type x, link_type p)
+typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::_copy(link_type x, link_type p)
 {
 	// structural copy
 	link_type r = x;
@@ -797,7 +781,7 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value,
 		left(p) = y;
 		parent(y) = p;
 		color(y) = color(x);
-		right(y) = __copy(right(x), y);
+		right(y) = _copy(right(x), y);
 		p = y;
 		x = left(x);
 	}
@@ -806,10 +790,9 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value,
 }
 
 template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::__erase(link_type x) {
-	// erase without rebalancing
+void rb_tree<Key, Value, KeyOfValue, Compare>::_erase(link_type x) {
 	while (x != NIL) {
-	__erase(right(x));
+	_erase(right(x));
 	link_type y = left(x);
 		value_allocator.destroy(&value(x));
 	put_node(x);
@@ -822,7 +805,7 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const_iterator first, const
 {
 	if (first == begin() && last == end() && node_count != 0)
 	{
-		__erase(root());
+		_erase(root());
 		leftmost() = header;
 		root() = NIL;
 		rightmost() = header;
