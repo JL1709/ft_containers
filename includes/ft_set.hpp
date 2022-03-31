@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:22:23 by julian            #+#    #+#             */
-/*   Updated: 2022/03/30 10:39:02 by jludt            ###   ########.fr       */
+/*   Updated: 2022/03/31 12:01:12 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ namespace ft
 			typedef typename allocator_type::const_reference 		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer 			const_pointer;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_iterator			iterator;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_iterator			const_iterator;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_reverse_iterator	reverse_iterator;
-			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare>::const_reverse_iterator	const_reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare, allocator_type>::const_iterator			iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare, allocator_type>::const_iterator			const_iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare, allocator_type>::const_reverse_iterator	reverse_iterator;
+			typedef typename rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare, allocator_type>::const_reverse_iterator	const_reverse_iterator;
 			// typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
 			// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator; 
 
 /* MEMBER Objects------------------------------------------------------------ */
 		private:
-			typedef rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare> RBTree;
+			typedef rb_tree<key_type, value_type, ident<value_type, key_type>, key_compare, allocator_type> RBTree;
 			RBTree	t;
 			Allocator _alloc;
 

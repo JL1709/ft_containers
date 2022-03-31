@@ -6,7 +6,7 @@
 #include "ft_utility.hpp"
 #include "ft_algorithm.hpp"
 
-template <class Key, class Value, class KeyOfValue, class Compare>
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
 class rb_tree
 {
 	protected:
@@ -22,7 +22,7 @@ class rb_tree
 			Value        value_field;
 			
 		};
-		static std::allocator<Node> Node_allocator;
+		static typename Allocator::template rebind<Node>::other Node_allocator;
 		static std::allocator<Value> value_allocator;
 
 	public:
@@ -32,7 +32,7 @@ class rb_tree
 		typedef typename std::allocator<Value>::const_pointer		const_pointer;
 		typedef typename std::allocator<Value>::reference			reference;
 		typedef typename std::allocator<Value>::const_reference		const_reference;
-		typedef typename std::allocator<Node>						Node_allocator_type;
+		typedef typename Allocator::template rebind<Node>::other	Node_allocator_type;
 		typedef typename std::allocator<Node>::pointer				link_type;
 		typedef typename std::allocator<Node>::size_type			size_type;
 		typedef typename std::allocator<Node>::difference_type		difference_type;
@@ -111,7 +111,7 @@ class rb_tree
 		friend class const_iterator;
 		class iterator : public ft::bidirectional_iterator<Value, difference_type>
 		{
-			friend class rb_tree<Key, Value, KeyOfValue, Compare>;
+			friend class rb_tree<Key, Value, KeyOfValue, Compare, Allocator>;
 			friend class const_iterator;
 			protected:
 				link_type node;
@@ -184,7 +184,7 @@ class rb_tree
 		};
 		class const_iterator : public ft::bidirectional_iterator<Value, difference_type>
 		{
-			friend class rb_tree<Key, Value, KeyOfValue, Compare>;
+			friend class rb_tree<Key, Value, KeyOfValue, Compare, Allocator>;
 			friend class iterator;
 			protected:
 				link_type node;
@@ -287,7 +287,7 @@ class rb_tree
 			init();
 			insert(first, last);
 		}
-		rb_tree(const rb_tree<Key, Value, KeyOfValue, Compare>& x, bool always = false) : node_count(x.node_count), insert_always(always), key_compare(x.key_compare)
+		rb_tree(const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& x, bool always = false) : node_count(x.node_count), insert_always(always), key_compare(x.key_compare)
 		{ 
 			++number_of_trees;
 			header = get_node();
@@ -317,7 +317,7 @@ class rb_tree
 				last = 0;
 			}
 		}
-		rb_tree<Key, Value, KeyOfValue, Compare> &operator=(const rb_tree<Key, Value, KeyOfValue, Compare>& x);
+		rb_tree<Key, Value, KeyOfValue, Compare, Allocator> &operator=(const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& x);
 
 	// accessors:
 
@@ -334,7 +334,7 @@ class rb_tree
 		bool		empty() const {return node_count == 0;}
 		size_type	size() const {return node_count;}
 		size_type	max_size() const {return Node_allocator.max_size();}
-		void		swap(rb_tree<Key, Value, KeyOfValue, Compare>& t)
+		void		swap(rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& t)
 		{
 			ft::swap(header, t.header);
 			ft::swap(node_count, t.node_count);
@@ -392,35 +392,35 @@ template <class InputIterator, class Distance>
     __distance(first, last, n, ft::bidirectional_iterator_tag());
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::buffer_pointer rb_tree<Key, Value, KeyOfValue, Compare>::buffer_list = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::buffer_pointer rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::buffer_list = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::free_list = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::link_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::free_list = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::next_avail = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::link_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::next_avail = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::last = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::link_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::last = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value, KeyOfValue, Compare>::number_of_trees = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::size_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::number_of_trees = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::Node_allocator_type rb_tree<Key, Value, KeyOfValue, Compare>::Node_allocator;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::Node_allocator_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::Node_allocator;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename std::allocator<Value> rb_tree<Key, Value, KeyOfValue, Compare>::value_allocator;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename std::allocator<Value> rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::value_allocator;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::buffer_allocator_type rb_tree<Key, Value, KeyOfValue, Compare>::buffer_allocator;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::buffer_allocator_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::buffer_allocator;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::NIL = 0;
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::link_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::NIL = 0;
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::deallocate_buffers() 
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::deallocate_buffers() 
 {
 	while (buffer_list) 
 	{
@@ -431,20 +431,20 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::deallocate_buffers()
 	}
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
- bool operator==(const rb_tree<Key, Value, KeyOfValue, Compare>& x, const rb_tree<Key, Value, KeyOfValue, Compare>& y)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+ bool operator==(const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& x, const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& y)
 {
 	return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin());
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
- bool operator<(const rb_tree<Key, Value, KeyOfValue, Compare>& x, const rb_tree<Key, Value, KeyOfValue, Compare>& y)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+ bool operator<(const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& x, const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& y)
 {
 	return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-rb_tree<Key, Value, KeyOfValue, Compare>& rb_tree<Key, Value, KeyOfValue, Compare>::operator=(const rb_tree<Key, Value, KeyOfValue, Compare>& x)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::operator=(const rb_tree<Key, Value, KeyOfValue, Compare, Allocator>& x)
 {
 	if (this != &x)
 	{
@@ -466,8 +466,8 @@ rb_tree<Key, Value, KeyOfValue, Compare>& rb_tree<Key, Value, KeyOfValue, Compar
 	return *this;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::_insert(link_type x, link_type y, const Value& v)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::_insert(link_type x, link_type y, const Value& v)
 {
 	++node_count;
 	link_type z = get_node();
@@ -545,15 +545,15 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	return iterator(z);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::clear(void)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::clear(void)
 {
 	erase(begin(), end());
 }
 
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::pair_iterator_bool rb_tree<Key, Value, KeyOfValue, Compare>::insert(const Value& v)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::pair_iterator_bool rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::insert(const Value& v)
 {
 	link_type y = header;
 	link_type x = root();
@@ -579,8 +579,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::pair_iterator_bool rb_tree<Ke
 	return pair_iterator_bool(j, false);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::insert(const_iterator position, const Value& v)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::insert(const_iterator position, const Value& v)
 {
 	if (position == const_iterator(begin()))
 	{
@@ -613,20 +613,20 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	}
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::insert(const_iterator first, const_iterator last)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::insert(const_iterator first, const_iterator last)
 {
 	while (first != last) insert(*first++);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::insert(const Value* first, const Value* last)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::insert(const Value* first, const Value* last)
 {
 	while (first != last) insert(*first++);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const_iterator position) 
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::erase(const_iterator position) 
 {
 	link_type z = position.node;
 	link_type y = z;
@@ -757,8 +757,8 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const_iterator position)
 	--node_count;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value, KeyOfValue, Compare>::erase(const Key& x)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::size_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::erase(const Key& x)
 {
 	pair_iterator_iterator p = equal_range(x);
 	size_type n = 0;
@@ -767,8 +767,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value,
 	return n;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value, KeyOfValue, Compare>::_copy(link_type x, link_type p)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::link_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::_copy(link_type x, link_type p)
 {
 	// structural copy
 	link_type r = x;
@@ -789,8 +789,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::link_type rb_tree<Key, Value,
 	return r;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::_erase(link_type x) {
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::_erase(link_type x) {
 	while (x != NIL) {
 	_erase(right(x));
 	link_type y = left(x);
@@ -800,8 +800,8 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::_erase(link_type x) {
 	}
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const_iterator first, const_iterator last)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::erase(const_iterator first, const_iterator last)
 {
 	if (first == begin() && last == end() && node_count != 0)
 	{
@@ -815,14 +815,14 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const_iterator first, const
 		while (first != last) erase(first++);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::erase(const Key* first, const Key* last)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::erase(const Key* first, const Key* last)
 {
 	while (first != last) erase(*first++);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::find(const Key& k)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::find(const Key& k)
 {
 	link_type y = header; /* Last node which is not less than k. */
 	link_type x = root(); /* Current node. */
@@ -837,8 +837,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	return (j == end() || key_compare(k, key(j.node))) ? end() : j;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare>::find(const Key& k) const
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::find(const Key& k) const
 {
 	link_type y = header; /* Last node which is not less than k. */
 	link_type x = root(); /* Current node. */
@@ -853,8 +853,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, V
 	return (j == end() || key_compare(k, key(j.node))) ? end() : j;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value, KeyOfValue, Compare>::count(const Key& k) const 
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::size_type rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::count(const Key& k) const 
 {
 	ft::pair<const_iterator, const_iterator> p = equal_range(k);
 	size_type n = 0;
@@ -862,8 +862,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::size_type rb_tree<Key, Value,
 	return n;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::lower_bound(const Key& k)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::lower_bound(const Key& k)
 {
 	link_type y = header; /* Last node which is not less than k. */
 	link_type x = root(); /* Current node. */
@@ -877,8 +877,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	return iterator(y);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare>::lower_bound(const Key& k) const
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::lower_bound(const Key& k) const
 {
 	link_type y = header; /* Last node which is not less than k. */
 	link_type x = root(); /* Current node. */
@@ -892,8 +892,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, V
 	return const_iterator(y);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, KeyOfValue, Compare>::upper_bound(const Key& k)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::upper_bound(const Key& k)
 {
 	link_type y = header; /* Last node which is greater than k. */
 	link_type x = root(); /* Current node. */
@@ -907,8 +907,8 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::iterator rb_tree<Key, Value, 
 	return iterator(y);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare>::upper_bound(const Key& k) const 
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::const_iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::upper_bound(const Key& k) const 
 {
 	link_type y = header; /* Last node which is greater than k. */
 	link_type x = root(); /* Current node. */
@@ -922,20 +922,20 @@ typename rb_tree<Key, Value, KeyOfValue, Compare>::const_iterator rb_tree<Key, V
 	return const_iterator(y);
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::pair_iterator_iterator rb_tree<Key, Value, KeyOfValue, Compare>::equal_range(const Key& k)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::pair_iterator_iterator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::equal_range(const Key& k)
 {
 	return pair_iterator_iterator(lower_bound(k), upper_bound(k));
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-typename rb_tree<Key, Value, KeyOfValue, Compare>::pair_citerator_citerator rb_tree<Key, Value, KeyOfValue, Compare>::equal_range(const Key& k) const
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+typename rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::pair_citerator_citerator rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::equal_range(const Key& k) const
 {
 	return pair_citerator_citerator(lower_bound(k), upper_bound(k));
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::rotate_left(link_type x)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::rotate_left(link_type x)
 {
 	link_type y = right(x);
 	right(x) = left(y);
@@ -952,8 +952,8 @@ void rb_tree<Key, Value, KeyOfValue, Compare>::rotate_left(link_type x)
 	parent(x) = y;
 }
 
-template <class Key, class Value, class KeyOfValue, class Compare>
-void rb_tree<Key, Value, KeyOfValue, Compare>::rotate_right(link_type x)
+template <class Key, class Value, class KeyOfValue, class Compare, class Allocator>
+void rb_tree<Key, Value, KeyOfValue, Compare, Allocator>::rotate_right(link_type x)
 {
 	link_type y = left(x);
 	left(x) = right(y);
